@@ -1,0 +1,43 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const basesDatos = [
+  { name: 'JSTOR',           area: 'Multidisciplinaria',     desc: 'Revistas académicas, libros y fuentes primarias.', href: 'https://www.jstor.org/' },
+  { name: 'SciELO',          area: 'Ciencia abierta',        desc: 'Biblioteca científica electrónica en línea.',     href: 'https://scielo.org/' },
+  { name: 'Redalyc',         area: 'Ciencias sociales',      desc: 'Revistas científicas de Iberoamérica.',           href: 'https://www.redalyc.org/' },
+  { name: 'DOAJ',            area: 'Acceso abierto',         desc: 'Directorio de revistas de acceso abierto.',       href: 'https://doaj.org/' },
+  { name: 'Google Scholar',  area: 'Buscador académico',     desc: 'Buscador de literatura académica.',               href: 'https://scholar.google.com/' },
+  { name: 'BASE',            area: 'Buscador académico',     desc: 'Motor de búsqueda académico multidisciplinar.',   href: 'https://www.base-search.net/' },
+];
+---
+
+<PageLayout
+  title="Bases de datos · Biblioteca Central ULS"
+  description="Acceso a bases de datos académicas suscritas y de acceso abierto."
+  eyebrow="Herramientas de búsqueda"
+  heading="Búsqueda en bases de datos"
+  subheading="Bases de datos académicas a las que la Biblioteca Central ULS facilita el acceso."
+>
+  <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {basesDatos.map((b) => (
+      <li>
+        <a href={b.href} target="_blank" rel="noopener noreferrer"
+           class="flex h-full flex-col rounded-2xl border border-blue-200 bg-white p-6 transition hover:border-blue-400 hover:bg-blue-50">
+          <span class="text-xs font-semibold uppercase tracking-wide text-stone-500">{b.area} ↗</span>
+          <h2 class="mt-2 font-display text-lg font-semibold text-stone-900">{b.name}</h2>
+          <p class="mt-2 flex-1 text-sm text-stone-700">{b.desc}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <div class="mt-10 rounded-2xl border border-blue-200 bg-white p-6">
+    <h2 class="font-display text-lg font-semibold text-stone-900">¿Necesitas acceso a una base de datos suscrita?</h2>
+    <p class="mt-2 text-sm text-stone-700">
+      Algunas bases requieren credenciales institucionales. Pregunta a un bibliotecario para recibir asistencia.
+    </p>
+    <a href="/contacto" class="mt-4 inline-flex items-center rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+      Contactar a un bibliotecario
+    </a>
+  </div>
+</PageLayout>

@@ -1,0 +1,19 @@
+---
+const links = [
+  { label: 'Pregunta a un bibliotecario', href: '/contacto' },
+  { label: 'Horarios', href: '/horarios' },
+  { label: 'Catálogo', href: '/catalogo' },
+];
+---
+
+<div class="hidden border-b border-blue-200 bg-blue-50 sm:block">
+  <div class="mx-auto flex max-w-7xl items-center justify-end gap-6 px-4 py-2 text-sm lg:px-6">
+    {
+      links.map((l) => (
+        <a href={l.href} class="font-medium text-blanck-700 hover:text-[#a51c30]">
+          {l.label}
+        </a>
+      ))
+    }
+  </div>
+</div>

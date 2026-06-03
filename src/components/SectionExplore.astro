@@ -1,0 +1,49 @@
+---
+const cards = [
+  {
+    title: 'Descubre nuestras colecciones',
+    text: 'Fondos con alcance global y profundidad disciplinar: de lo raro y único a amplios recursos digitales abiertos.',
+    href: '/colecciones',
+  },
+  {
+    title: 'Planifica tu visita',
+    text: 'Eventos públicos, espacios de estudio, horarios y orientación para investigadores y visitantes.',
+    href: '/horarios',
+  },
+  {
+    title: 'Apoyo a la investigación',
+    text: 'Conecta con especialistas que te ayudan a sacar el máximo partido a la biblioteca y sus servicios.',
+    href: '/contacto',
+  },
+];
+---
+
+<section class="bg-blue-50 py-16 lg:py-20">
+  <div class="mx-auto max-w-7xl px-4 lg:px-6">
+    <h2 class="text-center font-display text-3xl font-semibold text-blanck-900 sm:text-4xl">
+      Explora lo posible
+    </h2>
+    <p class="mx-auto mt-4 max-w-3xl text-center text-lg text-blanck-700">
+      La Biblioteca Central impulsa la docencia, la investigación y el aprendizaje con millones de ítems en decenas de
+      idiomas, desde materiales únicos hasta recursos digitales de acceso abierto.
+    </p>
+    <ul class="mt-12 grid gap-6 md:grid-cols-3">
+      {
+        cards.map((c) => (
+          <li>
+            <a
+              href={c.href}
+              class="group flex h-full flex-col rounded-2xl border border-blue-200 bg-white p-6 shadow-sm transition hover:border-blue-400 hover:shadow-md"
+            >
+              <h3 class="font-display text-xl font-semibold text-blanck-900 group-hover:text-blue-600">
+                {c.title}
+              </h3>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-blanck-700">{c.text}</p>
+              <span class="mt-4 text-sm font-semibold text-blue-600">Más información →</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

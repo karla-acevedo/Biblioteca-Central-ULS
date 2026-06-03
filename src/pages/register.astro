@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopUtilityBar from '../components/TopUtilityBar.astro';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<BaseLayout
+  title="Registrarse · Biblioteca Central ULS"
+  description="Crea tu cuenta para acceder a los servicios de la Biblioteca Central ULS."
+>
+  <TopUtilityBar />
+  <AnnouncementBar />
+  <SiteHeader />
+
+  <main id="contenido-principal">
+    <section class="relative flex min-h-[calc(100vh-180px)] items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 to-white px-4 py-14">
+
+      <!-- Blobs decorativos -->
+      <div class="pointer-events-none absolute inset-0 opacity-[0.12]" aria-hidden="true">
+        <div class="absolute -left-24 top-10 h-80 w-80 rounded-full bg-blue-500 blur-3xl"></div>
+        <div class="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-blue-400 blur-3xl"></div>
+      </div>
+
+      <!-- Card -->
+      <div class="relative z-10 w-full max-w-[460px] overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-xl shadow-blue-200/40">
+
+        <!-- Cabecera -->
+        <div class="bg-gradient-to-br from-blue-50 to-white border-b border-blue-100 px-8 py-7 text-center">
+          <img src="/logo-uls.png" alt="Logo Universidad Luterana Salvadoreña" class="mx-auto mb-3 h-20 w-auto" />
+          <h1 class="font-display text-2xl font-bold text-blue-900">Crear cuenta</h1>
+          <p class="mt-1 text-sm text-stone-600">Completa tus datos para registrarte</p>
+        </div>
+
+        <!-- Formulario -->
+        <div class="px-8 pb-8 pt-6">
+
+          <div id="alerta" class="hidden mb-4 rounded-lg px-4 py-3 text-sm font-medium" role="alert"></div>
+
+          <form id="registerForm" novalidate>
+
+            <div class="mb-4 grid grid-cols-2 gap-3">
+              <div>
+                <label for="nombre" class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-stone-500">Nombre *</label>
+                <input id="nombre" type="text" placeholder="Juan" autocomplete="given-name"
+                  class="w-full rounded-lg border border-blue-200 bg-blue-50 px-3.5 py-2.5 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-blue-500/60 focus:bg-white focus:ring-2 focus:ring-blue-500/20" />
+              </div>
+              <div>
+                <label for="apellido" class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-stone-500">Apellido *</label>
+                <input id="apellido" type="text" placeholder="Pérez" autocomplete="family-name"
+                  class="w-full rounded-lg border border-blue-200 bg-blue-50 px-3.5 py-2.5 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-blue-500/60 focus:bg-white focus:ring-2 focus:ring-blue-500/20" />
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="email" class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-stone-500">Correo electrónico *</label>
+              <input id="email" type="email" placeholder="correo@uls.edu.sv" autocomplete="email"
+                class="w-full rounded-lg border border-blue-200 bg-blue-50 px-3.5 py-2.5 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-blue-500/60 focus:bg-white focus:ring-2 focus:ring-blue-500/20" />
+            </div>
+
+            <div class="mb-4">
+              <label for="password" class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-stone-500">
+                Contraseña * <span class="normal-case font-normal text-stone-400">(mín. 6 caracteres)</span>
+              </label>
+              <div class="relative">
+                <input id="password" type="password" placeholder="••••••••" autocomplete="new-password"
+                  class="w-full rounded-lg border border-blue-200 bg-blue-50 px-3.5 py-2.5 pr-11 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-blue-500/60 focus:bg-white focus:ring-2 focus:ring-blue-500/20" />
+                <!-- FIX: id en vez de onclick para enlazarlo desde el script -->
+                <button type="button" id="btnVerPass1"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition" aria-label="Mostrar contraseña">👁️</button>
+              </div>
+              <div id="fuerzaWrap" class="hidden mt-2">
+                <div class="h-1.5 w-full overflow-hidden rounded-full bg-blue-200">
+                  <div id="fuerzaBarra" class="h-full rounded-full transition-all duration-300 w-0"></div>
+                </div>
+                <p id="fuerzaTexto" class="mt-1 text-xs font-medium"></p>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <label for="password2" class="mb-1.5 block text-xs font-bold uppercase tracking-wide text-stone-500">Confirmar contraseña *</label>
+              <div class="relative">
+                <input id="password2" type="password" placeholder="Repite tu contraseña" autocomplete="new-password"
+                  class="w-full rounded-lg border border-blue-200 bg-blue-50 px-3.5 py-2.5 pr-11 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-blue-500/60 focus:bg-white focus:ring-2 focus:ring-blue-500/20" />
+                <!-- FIX: id en vez de onclick -->
+                <button type="button" id="btnVerPass2"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition" aria-label="Mostrar contraseña">👁️</button>
+              </div>
+            </div>
+
+            <button id="btnRegistrar" type="submit"
+              class="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-500 py-3 text-sm font-bold text-white transition hover:bg-[#7a1525] disabled:opacity-60 active:scale-[.98]">
+              <span id="spinner" class="hidden h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white"></span>
+              <span id="btnTexto">Crear mi cuenta</span>
+            </button>
+
+          </form>
+
+          <p class="mt-5 text-center text-sm text-blue-500">
+            ¿Ya tienes cuenta?{' '}
+            <a href="/login" class="font-semibold text-blue-500 hover:text-[#7a1525] transition">Inicia sesión aquí</a>
+          </p>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<!-- FIX: is:inline para que todo quede en scope global y sin TypeScript -->
+<script is:inline>
+
+  // ── Ver / ocultar contraseña ────────────────────────────────────
+  function togglePassword(inputId, btn) {
+    var input = document.getElementById(inputId);
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      btn.textContent = '👁️';
+    }
+  }
+
+  document.getElementById('btnVerPass1').addEventListener('click', function () {
+    togglePassword('password', this);
+  });
+
+  document.getElementById('btnVerPass2').addEventListener('click', function () {
+    togglePassword('password2', this);
+  });
+
+  // ── Indicador de fuerza de contraseña ──────────────────────────
+  document.getElementById('password').addEventListener('input', function () {
+    var valor = this.value;
+    var wrap  = document.getElementById('fuerzaWrap');
+    var barra = document.getElementById('fuerzaBarra');
+    var texto = document.getElementById('fuerzaTexto');
+
+    if (!valor) { wrap.classList.add('hidden'); return; }
+    wrap.classList.remove('hidden');
+
+    var puntos = 0;
+    if (valor.length >= 6)           puntos++;
+    if (valor.length >= 10)          puntos++;
+    if (/[A-Z]/.test(valor))         puntos++;
+    if (/[0-9]/.test(valor))         puntos++;
+    if (/[^A-Za-z0-9]/.test(valor))  puntos++;
+
+    var niveles = [
+      { ancho: '20%',  color: '#ef4444', label: 'Muy débil'  },
+      { ancho: '40%',  color: '#f97316', label: 'Débil'      },
+      { ancho: '60%',  color: '#eab308', label: 'Regular'    },
+      { ancho: '80%',  color: '#22c55e', label: 'Fuerte'     },
+      { ancho: '100%', color: '#16a34a', label: 'Muy fuerte' },
+    ];
+    var nivel = niveles[Math.max(0, puntos - 1)];
+    barra.style.width      = nivel.ancho;
+    barra.style.background = nivel.color;
+    texto.style.color      = nivel.color;
+    texto.textContent      = nivel.label;
+  });
+
+  // ── Mostrar alerta ──────────────────────────────────────────────
+  function mostrarAlerta(mensaje, tipo) {
+    tipo = tipo || 'error';
+    var alerta = document.getElementById('alerta');
+    alerta.textContent = mensaje;
+    alerta.className = tipo === 'exito'
+      ? 'mb-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-800'
+      : 'mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700';
+    alerta.classList.remove('hidden');
+  }
+
+  // ── Envío del formulario ────────────────────────────────────────
+  document.getElementById('registerForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    var nombre    = document.getElementById('nombre').value.trim();
+    var apellido  = document.getElementById('apellido').value.trim();
+    var email     = document.getElementById('email').value.trim();
+    var password  = document.getElementById('password').value;
+    var password2 = document.getElementById('password2').value;
+
+    if (!nombre || !apellido || !email || !password || !password2) {
+      mostrarAlerta('Por favor completa todos los campos.'); return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      mostrarAlerta('El correo electrónico no tiene un formato válido.'); return;
+    }
+    if (password.length < 6) {
+      mostrarAlerta('La contraseña debe tener al menos 6 caracteres.'); return;
+    }
+    if (password !== password2) {
+      mostrarAlerta('Las contraseñas no coinciden. Verifícalas.'); return;
+    }
+
+    var btn     = document.getElementById('btnRegistrar');
+    var spinner = document.getElementById('spinner');
+    var btnText = document.getElementById('btnTexto');
+    btn.disabled        = true;
+    spinner.classList.remove('hidden');
+    btnText.textContent = 'Creando cuenta…';
+
+    try {
+      var respuesta = await fetch('/api/auth?action=register', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ nombre: nombre, apellido: apellido, email: email, password: password }),
+      });
+      var datos = await respuesta.json();
+
+      if (datos.error) {
+        mostrarAlerta(datos.error);
+      } else {
+        mostrarAlerta('¡Cuenta creada exitosamente! Redirigiendo…', 'exito');
+        setTimeout(function () { window.location.href = '/login'; }, 1500);
+      }
+    } catch (err) {
+      mostrarAlerta('Error de conexión. Verifica que el servidor esté activo.');
+    }
+
+    btn.disabled        = false;
+    spinner.classList.add('hidden');
+    btnText.textContent = 'Crear mi cuenta';
+  });
+
+</script>

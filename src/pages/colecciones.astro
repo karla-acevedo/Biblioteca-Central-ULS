@@ -1,0 +1,65 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const colecciones = [
+  {
+    slug: 'ilustraciones-botanicas',
+    title: 'Ilustraciones botánicas históricas',
+    desc: 'Láminas, grabados y dibujos científicos de flora salvadoreña y centroamericana digitalizados a alta resolución.',
+    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80',
+    items: 1284,
+  },
+  {
+    slug: 'cartografia',
+    title: 'Cartografía y territorios',
+    desc: 'Mapas históricos, planos urbanos y representaciones del territorio salvadoreño desde el siglo XIX.',
+    image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200&q=80',
+    items: 612,
+  },
+  {
+    slug: 'patrimonio-juridico',
+    title: 'Patrimonio jurídico y manuscritos',
+    desc: 'Documentos jurídicos, manuscritos y archivos institucionales de valor patrimonial.',
+    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=1200&q=80',
+    items: 943,
+  },
+  {
+    slug: 'memoria-regional',
+    title: 'Memoria e historia regional',
+    desc: 'Fotografías, testimonios orales y documentos sobre la historia local y regional.',
+    image: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=1200&q=80',
+    items: 2056,
+  },
+];
+---
+
+<PageLayout
+  title="Colecciones digitales · Biblioteca Central ULS"
+  description="Explora las colecciones digitales de la Biblioteca Central ULS."
+  eyebrow="Colecciones digitales"
+  heading="Colecciones digitales"
+  subheading="Materiales digitalizados y nativos digitales: fondos especiales, archivos históricos y exposiciones."
+>
+  <ul class="grid gap-8 lg:grid-cols-2">
+    {colecciones.map((c) => (
+      <li id={c.slug} class="scroll-mt-28">
+        <article class="overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm">
+          <div class="aspect-[16/9] overflow-hidden">
+            <img src={c.image} alt={c.title} class="h-full w-full object-cover" loading="lazy" />
+          </div>
+          <div class="p-6">
+            <p class="text-xs font-semibold uppercase tracking-wide text-blue-600">Digital · {c.items} ítems</p>
+            <h2 class="mt-2 font-display text-xl font-semibold text-blue-900">{c.title}</h2>
+            <p class="mt-2 text-sm text-stone-700">{c.desc}</p>
+            <a
+              href={`/catalogo?categoria=${c.slug}`}
+              class="mt-4 inline-flex items-center rounded-full border border-blue-300 px-4 py-1.5 text-sm font-semibold text-blue-700 transition hover:border-blue-500 hover:text-blue-900"
+            >
+              Explorar colección →
+            </a>
+          </div>
+        </article>
+      </li>
+    ))}
+  </ul>
+</PageLayout>

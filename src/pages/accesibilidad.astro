@@ -1,0 +1,53 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Accesibilidad · Biblioteca Central ULS"
+  description="Compromiso y recursos de accesibilidad de la Biblioteca Central ULS."
+  eyebrow="Apoyo"
+  heading="Accesibilidad"
+  subheading="Trabajamos para que la biblioteca sea accesible para todas las personas."
+>
+  <div class="grid gap-8 lg:grid-cols-3">
+    <div class="lg:col-span-2 space-y-6">
+      <section class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm">
+        <h2 class="font-display text-xl font-semibold text-stone-900">Nuestro compromiso</h2>
+        <p class="mt-2 text-sm text-stone-700">
+          La Biblioteca Central ULS trabaja para garantizar que sus servicios, instalaciones y contenidos digitales
+          puedan ser utilizados por todas las personas, incluyendo personas con discapacidad visual, auditiva, motora
+          o cognitiva.
+        </p>
+      </section>
+
+      <section class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm">
+        <h2 class="font-display text-xl font-semibold text-stone-900">Recursos disponibles</h2>
+        <ul class="mt-3 grid gap-2 text-sm text-stone-700">
+          <li>• Rampas y ascensores en la sede central.</li>
+          <li>• Sala de lectura con escritorios accesibles.</li>
+          <li>• Lectores de pantalla y software de magnificación en puestos asignados.</li>
+          <li>• Préstamo de audiolibros y libros en formato digital accesible.</li>
+          <li>• Atención personalizada por parte del personal capacitado.</li>
+        </ul>
+      </section>
+
+      <section class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm">
+        <h2 class="font-display text-xl font-semibold text-stone-900">Accesibilidad del sitio web</h2>
+        <p class="mt-2 text-sm text-stone-700">
+          Procuramos seguir las pautas WCAG 2.1 nivel AA. Si encuentras una barrera en este sitio,
+          <a href="/contacto#reportar" class="text-blue-700 hover:text-blue-900">repórtala aquí</a> y trabajaremos para corregirla.
+        </p>
+      </section>
+    </div>
+
+    <aside class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm">
+      <h3 class="font-display text-lg font-semibold text-stone-900">¿Necesitas apoyo?</h3>
+      <p class="mt-2 text-sm text-stone-700">
+        Si requieres asistencia personalizada, escríbenos con anticipación para coordinar tu visita.
+      </p>
+      <a href="/contacto" class="mt-4 inline-flex items-center rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+        Contactar
+      </a>
+    </aside>
+  </div>
+</PageLayout>

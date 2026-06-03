@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "nombre": "Administrador",
+    "apellido": "Sistema",
+    "email": "admin@biblioteca.uls.edu.sv",
+    "password": "c11d3c029e4b2af2a0707254760980584933bb22d371c208c0111428975af31f",
+    "rol": "admin",
+    "activo": true,
+    "creado": "2026-05-19T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "nombre": "Karla",
+    "apellido": "Acevedo",
+    "email": "acevedokarly654@gmail.com",
+    "password": "c11d3c029e4b2af2a0707254760980584933bb22d371c208c0111428975af31f",
+    "rol": "admin",
+    "activo": true,
+    "creado": "2026-05-19T10:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "nombre": "Eliseo",
+    "apellido": "Gomez",
+    "email": "eliseo.gomez@gmail.com",
+    "password": "ad9b2fc848ce059bca482e014279fa05b9d908302f62d155a065c9a8905ec2b4",
+    "rol": "usuario",
+    "activo": true,
+    "creado": "2026-05-19T10:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "nombre": "Mario",
+    "apellido": "Portillo",
+    "email": "m.portillo@gmail.com",
+    "password": "ad9b2fc848ce059bca482e014279fa05b9d908302f62d155a065c9a8905ec2b4",
+    "rol": "usuario",
+    "activo": true,
+    "creado": "2026-05-29T00:00:00.000Z"
+  }
+]

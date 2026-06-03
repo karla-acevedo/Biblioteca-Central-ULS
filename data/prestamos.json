@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "usuarioId": 2,
+    "usuarioNombre": "Karla Guadrón",
+    "libroId": 1,
+    "libroTitulo": "El arte de la programación",
+    "libroAutor": "Donald Knuth",
+    "fechaPrestamo": "2026-04-21",
+    "fechaDevolucion": "2026-05-05",
+    "devuelto": false,
+    "fechaRetorno": null
+  },
+  {
+    "id": 2,
+    "usuarioId": 3,
+    "usuarioNombre": "Eliseo Gomez",
+    "libroId": 8,
+    "libroTitulo": "Cálculo diferencial e integral",
+    "libroAutor": "James Stewart",
+    "fechaPrestamo": "2026-04-22",
+    "fechaDevolucion": "2026-05-06",
+    "devuelto": true,
+    "fechaRetorno": "2026-05-17T15:37:06.794Z"
+  },
+  {
+    "id": 3,
+    "usuarioId": 3,
+    "usuarioNombre": "Eliseo Gomez",
+    "libroId": 1,
+    "libroTitulo": "El arte de la programación",
+    "libroAutor": "Donald Knuth",
+    "fechaPrestamo": "2026-05-17",
+    "fechaDevolucion": "2026-05-31",
+    "devuelto": false,
+    "fechaRetorno": null
+  },
+  {
+    "id": 4,
+    "usuarioId": 3,
+    "usuarioNombre": "Eliseo Gomez",
+    "libroId": 8,
+    "libroTitulo": "Cálculo diferencial e integral",
+    "libroAutor": "James Stewart",
+    "fechaPrestamo": "2026-05-20",
+    "fechaDevolucion": "2026-06-03",
+    "devuelto": false,
+    "fechaRetorno": null
+  },
+  {
+    "id": 5,
+    "usuarioId": 2,
+    "usuarioNombre": "Karla Acevedo",
+    "libroId": 9,
+    "libroTitulo": "Don Quijote ",
+    "libroAutor": "Cervantes",
+    "fechaPrestamo": "2026-05-23",
+    "fechaDevolucion": "2026-06-06",
+    "devuelto": false,
+    "fechaRetorno": null
+  },
+  {
+    "id": 6,
+    "usuarioId": 4,
+    "usuarioNombre": "M. Portillo",
+    "libroId": 7,
+    "libroTitulo": "El origen de las especies",
+    "libroAutor": "Charles Darwin",
+    "fechaPrestamo": "2026-05-30",
+    "fechaDevolucion": "2026-06-13",
+    "devuelto": false,
+    "fechaRetorno": null
+  },
+  {
+    "id": 7,
+    "usuarioId": 4,
+    "usuarioNombre": "M. Portillo",
+    "libroId": 3,
+    "libroTitulo": "Una breve historia del tiempo",
+    "libroAutor": "Stephen Hawking",
+    "fechaPrestamo": "2026-06-01",
+    "fechaDevolucion": "2026-06-15",
+    "devuelto": true,
+    "fechaRetorno": "2026-06-01T04:01:14.886Z"
+  }
+]

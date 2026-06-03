@@ -1,0 +1,77 @@
+---
+const exhibitions = [
+  {
+    title: 'Música en misión: legado de jazz y espiritual',
+    date: 'Hasta marzo 2027 · Sala de exposiciones',
+    slug: 'musica-en-mision',
+    image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80',
+    alt: 'Concierto y público en sala',
+  },
+];
+
+const events = [
+  { day: '24', month: 'Apr', slug: 'recorrido-biblioteca-historica', title: 'Recorrido por la biblioteca histórica', time: '14:00 – 15:00', place: 'Sede central' },
+  { day: '27', month: 'Apr', slug: 'charla-mecanografas-artes',     title: 'Charla: trabajo de mecanógrafas en las artes', time: '16:00 – 16:45', place: 'Sala de lectura' },
+  { day: '27', month: 'Apr', slug: 'presentacion-libro-hibrida',    title: 'Presentación de libro híbrida', time: '16:30 – 17:30', place: 'Auditorio' },
+];
+---
+
+<section id="expos" class="bg-blue-50 py-16 lg:py-20">
+  <div class="mx-auto max-w-7xl px-4 lg:px-6">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div>
+        <h2 class="font-display text-2xl font-semibold text-blanck-900 sm:text-3xl">Exposiciones</h2>
+        <ul class="mt-6 space-y-6">
+          {
+            exhibitions.map((ex) => (
+              <li>
+                <a href={`/exposiciones#${ex.slug}`} class="group flex gap-4 rounded-xl border border-blue-200 bg-white p-3 shadow-sm transition hover:border-blue-400">
+                  <div class="relative h-28 w-36 shrink-0 overflow-hidden rounded-lg bg-stone-200">
+                    <img src={ex.image} alt="" class="h-full w-full object-cover transition group-hover:scale-105" loading="lazy" width="144" height="112" />
+                  </div>
+                  <div class="min-w-0 py-1">
+                    <h3 class="font-display text-lg font-semibold text-blue-900 group-hover:text-bl-600">
+                      {ex.title}
+                    </h3>
+                    <p class="mt-1 text-sm text-blanck-700">{ex.date}</p>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a href="/exposiciones" class="mt-4 inline-block text-sm font-semibold text-blue-600 hover:text-blue-800">
+          Ver todas las exposiciones →
+        </a>
+      </div>
+
+      <div id="servicios">
+        <h2 class="font-display text-2xl font-semibold text-blanck-900 sm:text-3xl">Próximos eventos</h2>
+        <ul class="mt-6 divide-y divide-blue-100 rounded-xl border border-blue-200 bg-white">
+          {
+            events.map((ev) => (
+              <li>
+                <a href={`/eventos#${ev.slug}`} class="flex gap-4 px-4 py-4 first:rounded-t-xl last:rounded-b-xl hover:bg-blue-50 transition">
+                  <div class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-lg bg-blue-100 text-center">
+                    <span class="text-xs font-semibold uppercase text-blanck-500">{ev.month}</span>
+                    <span class="text-lg font-bold text-blanck-900">{ev.day}</span>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="text-xs font-semibold uppercase tracking-wide text-blanck-400">Evento</p>
+                    <h3 class="font-display text-base font-semibold text-blanck-900">{ev.title}</h3>
+                    <p class="mt-1 text-sm text-blue-600">
+                      {ev.time} · {ev.place}
+                    </p>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a href="/eventos" class="mt-4 inline-block text-sm font-semibold text-blue-600 hover:text-blue-800">
+          Ver calendario completo →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

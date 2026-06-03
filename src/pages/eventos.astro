@@ -1,0 +1,42 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const eventos = [
+  { slug: 'recorrido-biblioteca-historica', day: '24', month: 'Abr', time: '14:00 – 15:00', place: 'Sede central',     title: 'Recorrido por la biblioteca histórica',  desc: 'Visita guiada por las salas históricas con una bibliotecaria.' },
+  { slug: 'charla-mecanografas-artes',      day: '27', month: 'Abr', time: '16:00 – 16:45', place: 'Sala de lectura',  title: 'Charla: trabajo de mecanógrafas en las artes', desc: 'Una conversación sobre el rol de las mecanógrafas en el mundo artístico del siglo XX.' },
+  { slug: 'presentacion-libro-hibrida',     day: '27', month: 'Abr', time: '16:30 – 17:30', place: 'Auditorio',        title: 'Presentación de libro híbrida',          desc: 'Presentación con transmisión en línea simultánea.' },
+  { slug: 'taller-fuentes-primarias',       day: '03', month: 'May', time: '10:00 – 12:00', place: 'Sala B',           title: 'Taller: cómo citar fuentes primarias',   desc: 'Taller práctico abierto a estudiantes y docentes.' },
+  { slug: 'noche-poesia',                   day: '10', month: 'May', time: '19:00 – 21:00', place: 'Patio interior',   title: 'Noche de poesía latinoamericana',        desc: 'Lecturas abiertas de poesía contemporánea.' },
+];
+---
+
+<PageLayout
+  title="Calendario de eventos · Biblioteca Central ULS"
+  description="Próximos eventos de la Biblioteca Central ULS."
+  eyebrow="Visítanos"
+  heading="Próximos eventos"
+  subheading="Talleres, charlas, presentaciones y visitas guiadas."
+>
+  <ul class="divide-y divide-blue-100 overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm">
+    {eventos.map((ev) => (
+      <li id={ev.slug} class="scroll-mt-28 flex flex-col gap-4 p-6 sm:flex-row sm:items-start">
+        <div class="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-lg bg-blue-100 text-center">
+          <span class="text-xs font-semibold uppercase text-stone-500">{ev.month}</span>
+          <span class="text-xl font-bold text-stone-900">{ev.day}</span>
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="text-xs font-semibold uppercase tracking-wide text-stone-400">Evento</p>
+          <h2 class="mt-1 font-display text-lg font-semibold text-stone-900">{ev.title}</h2>
+          <p class="mt-1 text-sm text-blue-600">{ev.time} · {ev.place}</p>
+          <p class="mt-2 text-sm text-stone-700">{ev.desc}</p>
+        </div>
+        <a
+          href="/contacto"
+          class="self-start rounded-full border border-blue-300 px-4 py-1.5 text-sm font-semibold text-blue-700 transition hover:border-blue-500 hover:text-blue-900"
+        >
+          Inscribirse
+        </a>
+      </li>
+    ))}
+  </ul>
+</PageLayout>

@@ -1,0 +1,428 @@
+---
+const nav = [
+  {
+    label: 'Colecciones',
+    href: '/colecciones',
+    children: [
+      { label: 'Catálogo de libros', href: '/catalogo' },
+      { label: 'Colecciones digitales', href: '/colecciones' },
+      { label: 'Bases de datos', href: '/bases-datos' },
+      { label: 'Repositorio institucional', href: '/repositorio' },
+    ],
+  },
+  {
+    label: 'Visítanos',
+    href: '/horarios',
+    children: [
+      { label: 'Horarios y sedes', href: '/horarios' },
+      { label: 'Exposiciones', href: '/exposiciones' },
+      { label: 'Próximos eventos', href: '/eventos' },
+    ],
+  },
+  {
+    label: 'Servicios',
+    href: '/prestamos',
+    children: [
+      { label: 'Préstamo y reservas', href: '/prestamos' },
+      { label: 'Pregunta a un bibliotecario', href: '/contacto' },
+      { label: 'Guías de investigación', href: '/guias' },
+      { label: 'Accesibilidad', href: '/accesibilidad' },
+    ],
+  },
+  {
+    label: 'Acerca de',
+    href: '/#acerca',
+    children: [
+      { label: 'Acceso abierto', href: '/#acerca' },
+      { label: 'Donaciones', href: '/donaciones' },
+      { label: 'Prensa', href: '/prensa' },
+      { label: 'Reportar un problema', href: '/contacto#reportar' },
+    ],
+  },
+];
+---
+
+<header class="header">
+  <div class="header-container">
+
+    <!-- LOGO -->
+    <a href="/" class="logo">
+      <img src="/logo-uls.png" alt="Logo biblioteca" />
+      <div>
+        <span class="logo-title">Biblioteca Central</span>
+        <span class="logo-subtitle">ULS</span>
+      </div>
+    </a>
+
+    <!-- MENÚ ESCRITORIO -->
+    <nav class="desktop-nav">
+      {nav.map((item) => (
+        <div class="dropdown">
+          <button type="button" class="nav-link" aria-expanded="false">
+            {item.label}
+            <span class="chevron" aria-hidden="true">▾</span>
+          </button>
+
+          <div class="dropdown-menu">
+            <a href={item.href} class="dropdown-main">Ir a {item.label} →</a>
+            {item.children.map((child) => (
+              <a href={child.href}>{child.label}</a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </nav>
+
+    <!-- BOTONES -->
+    <div class="desktop-actions">
+      <a href="/catalogo" class="btn btn-outline">Buscar</a>
+
+      <div id="guest-actions" class="guest-actions">
+        <a href="/register" class="btn btn-light">Registrarse</a>
+        <a href="/login" class="btn btn-primary">Iniciar sesión</a>
+      </div>
+
+      <div id="user-actions" class="user-actions">
+        <span id="user-name"></span>
+        <button id="logout-btn" class="btn btn-outline">Salir</button>
+      </div>
+    </div>
+
+    <!-- BOTÓN HAMBURGUESA SIEMPRE VISIBLE -->
+    <button id="menu-toggle" class="menu-toggle">☰</button>
+
+    <!-- MENÚ DESPLEGABLE -->
+    <div id="mobile-menu" class="mobile-menu">
+      {nav.map((item) => (
+        <div class="mobile-group">
+          <a href={item.href} class="mobile-title">{item.label}</a>
+          {item.children.map((child) => (
+            <a href={child.href} class="mobile-link">{child.label}</a>
+          ))}
+        </div>
+      ))}
+
+      <div class="mobile-actions">
+        <div id="guest-mobile" class="guest-mobile">
+          <a href="/register" class="btn btn-light">Registrarse</a>
+          <a href="/login" class="btn btn-primary">Iniciar sesión</a>
+        </div>
+
+        <div id="user-mobile" class="user-mobile">
+          <span id="user-name-mobile"></span>
+          <button id="logout-btn-mobile" class="btn btn-outline">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<style>
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #eff6ff;
+  border-bottom: 1px solid #bfdbfe;
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: auto;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 34px;
+}
+
+.logo-title {
+  display: block;
+  color: #1e3a5f;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.logo-subtitle {
+  display: block;
+  color: #60a5fa;
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+
+.desktop-nav {
+  display: flex;
+  margin-left: 30px;
+  gap: 16px;
+}
+
+.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #1d4ed8;
+  font-weight: 500;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 6px;
+  transition: background .15s ease;
+}
+
+.nav-link:hover {
+  background: #dbeafe;
+}
+
+.chevron {
+  font-size: 12px;
+  transition: transform .2s ease;
+  line-height: 1;
+}
+
+.dropdown.open .chevron {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background: white;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.1);
+  z-index: 200;
+  padding: 6px 0;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #1d4ed8;
+}
+
+.dropdown-menu a:hover {
+  background: #eff6ff;
+}
+
+.dropdown-main {
+  font-weight: 600;
+  border-bottom: 1px solid #bfdbfe;
+  margin-bottom: 4px;
+  padding-bottom: 10px !important;
+}
+
+.desktop-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.guest-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.user-actions {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  color: #1e3a5f;
+  font-size: 14px;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-outline {
+  border: 1px solid #93c5fd;
+  color: #1d4ed8;
+  background: white;
+}
+
+.btn-light {
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+
+.btn-primary {
+  border: 1px solid #1d6fad;
+  color: #1d6fad;
+  background: white;
+}
+
+.menu-toggle {
+  display: block;
+  margin-left: 10px;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 16px;
+  width: 280px;
+  background: white;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  box-shadow: 0 20px 30px rgba(0,0,0,.1);
+  padding: 16px;
+}
+
+.mobile-menu.active {
+  display: block;
+}
+
+.mobile-group {
+  margin-bottom: 14px;
+}
+
+.mobile-title {
+  display: block;
+  font-weight: bold;
+  text-decoration: none;
+  color: #1e3a5f;
+  margin-bottom: 6px;
+}
+
+.mobile-link {
+  display: block;
+  text-decoration: none;
+  color: #1d4ed8;
+  margin: 4px 0;
+}
+
+.guest-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+}
+</style>
+
+<script is:inline>
+document.addEventListener("DOMContentLoaded", () => {
+  // --- Dropdowns de escritorio: abrir/cerrar con clic en el botón completo ---
+  const dropdowns = document.querySelectorAll(".desktop-nav .dropdown");
+
+  dropdowns.forEach((dd) => {
+    const btn = dd.querySelector(".nav-link");
+    btn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      // Cerrar los demás
+      dropdowns.forEach((other) => {
+        if (other !== dd) {
+          other.classList.remove("open");
+          other.querySelector(".nav-link")?.setAttribute("aria-expanded", "false");
+        }
+      });
+      // Toggle del actual
+      const isOpen = dd.classList.toggle("open");
+      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+  });
+
+  // Cerrar dropdowns al hacer clic fuera
+  document.addEventListener("click", (e) => {
+    dropdowns.forEach((dd) => {
+      if (!dd.contains(e.target)) {
+        dd.classList.remove("open");
+        dd.querySelector(".nav-link")?.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  // Cerrar dropdowns con tecla Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      dropdowns.forEach((dd) => {
+        dd.classList.remove("open");
+        dd.querySelector(".nav-link")?.setAttribute("aria-expanded", "false");
+      });
+    }
+  });
+
+  // --- Menú móvil (hamburguesa) ---
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  toggle?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menu.classList.toggle("active");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (menu && !menu.contains(e.target) && !toggle.contains(e.target)) {
+      menu.classList.remove("active");
+    }
+  });
+
+  // --- Sesión de usuario ---
+  const userData = localStorage.getItem("uls_usuario");
+
+  if (userData) {
+    const user = JSON.parse(userData);
+    const name = user.nombre || "Usuario";
+
+    document.getElementById("guest-actions").style.display = "none";
+    document.getElementById("user-actions").style.display = "flex";
+    document.getElementById("user-name").textContent = "Hola, " + name;
+
+    document.getElementById("guest-mobile").style.display = "none";
+    document.getElementById("user-mobile").style.display = "flex";
+    document.getElementById("user-name-mobile").textContent = "Hola, " + name;
+  }
+
+  const logout = () => {
+    localStorage.removeItem("uls_usuario");
+    window.location.href = "/login";
+  };
+
+  document.getElementById("logout-btn")?.addEventListener("click", logout);
+  document.getElementById("logout-btn-mobile")?.addEventListener("click", logout);
+});
+</script>

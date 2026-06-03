@@ -1,0 +1,69 @@
+---
+const cols = [
+  {
+    title: 'Enlaces rápidos',
+    links: [
+      { label: 'Catálogo en línea', href: '/catalogo' },
+      { label: 'Bases de datos', href: '/bases-datos' },
+      { label: 'Horarios', href: '/horarios' },
+    ],
+  },
+  {
+    title: 'Apoyo',
+    links: [
+      { label: 'Pregunta a un bibliotecario', href: '/contacto' },
+      { label: 'Guías de investigación', href: '/guias' },
+      { label: 'Accesibilidad', href: '/accesibilidad' },
+    ],
+  },
+  {
+    title: 'Institucional',
+    links: [
+      { label: 'Donaciones', href: '/donaciones' },
+      { label: 'Prensa', href: '/prensa' },
+      { label: 'Reportar un problema', href: '/contacto#reportar' },
+    ],
+  },
+];
+---
+
+<footer id="footer" class="border-t border-stone-200 bg-blue-50">
+  <div class="mx-auto max-w-7xl px-4 py-12 lg:px-6">
+    <div class="grid gap-10 md:grid-cols-2 lg:blue-cols-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="/logo-uls.png" alt="" width="40" height="40" class="h-10 w-auto" />
+          <div>
+            <p class="font-display text-lg font-semibold text-blanck-900">
+              Biblioteca Central ULS
+            </p>
+            <p class="text-sm text-blanck-600">Conocimiento al servicio de la comunidad universitaria.</p>
+          </div>
+        </div>
+      </div>
+      {
+        cols.map((col) => (
+          <div>
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-black-500">{col.title}</h2>
+            <ul class="mt-3 space-y-2">
+              {col.links.map((l) => (
+                <li>
+                  <a href={l.href} class="text-sm text-blue-700 hover:text-[#a51c30]">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    <div class="mt-10 flex flex-col gap-4 border-t border-stone-200 pt-8 text-sm text-blanck-600 sm:flex-row sm:items-center sm:justify-between">
+      <p>© {new Date().getFullYear()} Biblioteca Central ULS. Todos los derechos reservados.</p>
+      <p class="text-blanck-500">
+        Karla Mariana Acevedo - ULS{' '}
+       
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,49 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const horarios = [
+  { sede: 'Sede central',         dias: 'Lunes a viernes', hora: '7:00 – 20:00' },
+  { sede: 'Sede central',         dias: 'Sábado',          hora: '8:00 – 14:00' },
+  { sede: 'Sede central',         dias: 'Domingo',         hora: 'Cerrado' },
+  { sede: 'Sala de lectura',      dias: 'Lunes a viernes', hora: '7:00 – 22:00 (extendido en parciales)' },
+  { sede: 'Hemeroteca',           dias: 'Lunes a viernes', hora: '8:00 – 18:00' },
+  { sede: 'Sala de exposiciones', dias: 'Martes a sábado', hora: '10:00 – 18:00' },
+];
+---
+
+<PageLayout
+  title="Horarios · Biblioteca Central ULS"
+  description="Horarios de atención de la Biblioteca Central ULS y sus salas."
+  eyebrow="Visítanos"
+  heading="Horarios"
+  subheading="Horarios de atención de la Biblioteca Central ULS."
+>
+  <div class="overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm">
+    <table class="w-full text-sm">
+      <thead class="bg-blue-50 text-left text-stone-600">
+        <tr>
+          <th class="px-6 py-3 font-semibold">Sede / sala</th>
+          <th class="px-6 py-3 font-semibold">Días</th>
+          <th class="px-6 py-3 font-semibold">Horario</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-blue-100">
+        {horarios.map((h) => (
+          <tr class="hover:bg-blue-50/40">
+            <td class="px-6 py-4 font-medium text-stone-900">{h.sede}</td>
+            <td class="px-6 py-4 text-stone-700">{h.dias}</td>
+            <td class="px-6 py-4 text-stone-700">{h.hora}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-8 rounded-2xl border border-blue-200 bg-white p-6">
+    <h2 class="font-display text-lg font-semibold text-stone-900">Días feriados</h2>
+    <p class="mt-2 text-sm text-stone-700">
+      Durante feriados nacionales y receso académico los horarios pueden variar. Consulta los anuncios en la página
+      principal o contacta a un bibliotecario.
+    </p>
+  </div>
+</PageLayout>

@@ -1,0 +1,49 @@
+---
+const links = [
+  {
+    label: 'Repositorio institucional abierto',
+    href: 'https://doaj.org/',
+    desc: 'Investigación de la comunidad en acceso abierto.',
+  },
+  {
+    label: 'Corpus de dominio público',
+    href: 'https://www.gutenberg.org/',
+    desc: 'Libros digitalizados libres de derechos para leer en línea.',
+  },
+  {
+    label: 'APIs y conjuntos de datos',
+    href: 'https://datos.gob.es/',
+    desc: 'Metadatos y datos para exploración e investigación.',
+  },
+];
+---
+
+<section id="acerca" class="border-t border-blue-200 bg-blue-50 py-16 lg:py-20">
+  <div class="mx-auto max-w-7xl px-4 lg:px-6">
+    <h2 class="font-display text-3xl font-semibold text-blanck-900 sm:text-4xl">
+      Impulsando el acceso abierto y el conocimiento para todos
+    </h2>
+    <p class="mt-4 max-w-3xl text-lg text-blanck-700">
+      Construimos un ecosistema de conocimiento donde la innovación, el acceso y la preservación sirven no solo a la
+      universidad, sino a comunidades y creadores en todo el mundo.
+    </p>
+    <ul class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex h-full flex-col rounded-2xl border border-blue-200 bg-white p-6 transition hover:border-blue-400 hover:bg-blue-50"
+            >
+              <span class="text-sm font-semibold uppercase tracking-wide text-blanck-500">Enlace externo ↗</span>
+              <h3 class="mt-2 font-display text-lg font-semibold text-blanck-900">{l.label}</h3>
+              <p class="mt-2 flex-1 text-sm text-blue-700">{l.desc}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

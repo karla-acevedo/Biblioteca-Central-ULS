@@ -1,0 +1,88 @@
+---
+const items = [
+  {
+    title: 'Ilustraciones botánicas históricas',
+    tag: 'Digital',
+    slug: 'ilustraciones-botanicas',
+    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
+    alt: 'Estantería con libros en una biblioteca',
+  },
+  {
+    title: 'Cartografía y territorios',
+    tag: 'Digital',
+    slug: 'cartografia',
+    image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80',
+    alt: 'Interior de biblioteca con grandes estanterías',
+  },
+  {
+    title: 'Patrimonio jurídico y manuscritos',
+    tag: 'Digital',
+    slug: 'patrimonio-juridico',
+    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80',
+    alt: 'Libro antiguo abierto con páginas amarillas',
+  },
+  {
+    title: 'Memoria e historia regional',
+    tag: 'Digital',
+    slug: 'memoria-regional',
+    image: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80',
+    alt: 'Pila de libros sobre una mesa de estudio',
+  },
+];
+---
+
+<section id="digital" class="border-t border-blue-200 bg-blue-50 py-12 lg:py-16">
+  <div class="mx-auto max-w-6xl px-4 lg:px-6">
+
+    <!-- Encabezado -->
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 class="font-display text-2xl font-semibold text-blanck-900 sm:text-3xl">
+          Colecciones digitales
+        </h2>
+        <p class="mt-1.5 max-w-xl text-sm text-blanck-700">
+          Accede en línea a materiales digitalizados y nativos digitales: exposiciones, fondos especiales y archivos.
+        </p>
+      </div>
+      <a
+        href="/colecciones"
+        class="inline-flex w-fit items-center rounded-full border border-blue-300 px-4 py-1.5 text-sm font-semibold text-blue-700 transition hover:border-blue-500 hover:text-blue-900"
+      >
+        Ver catálogo completo →
+      </a>
+    </div>
+
+    <!-- Grid de tarjetas -->
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        items.map((item) => (
+          <li>
+            <a href={`/colecciones#${item.slug}`} class="block">
+              <article class="group overflow-hidden rounded-xl border border-blue-200 bg-stone-50 shadow-sm transition hover:-translate-y-1 hover:shadow-md cursor-pointer">
+                <div class="relative aspect-[3/2] overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    width="360"
+                    height="240"
+                  />
+                  <span class="absolute left-2.5 top-2.5 rounded-full bg-white/90 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-blue-700">
+                    {item.tag}
+                  </span>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-display text-sm font-semibold leading-snug text-blue-900 group-hover:text-blue-600 transition">
+                    {item.title}
+                  </h3>
+                </div>
+              </article>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Donaciones · Biblioteca Central ULS"
+  description="Información sobre cómo donar libros o recursos a la Biblioteca Central ULS."
+  eyebrow="Institucional"
+  heading="Donaciones"
+  subheading="Ayúdanos a hacer crecer nuestras colecciones y servicios."
+>
+  <div class="grid gap-8 lg:grid-cols-3">
+    <div class="lg:col-span-2 space-y-6">
+      <section class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm">
+        <h2 class="font-display text-xl font-semibold text-stone-900">Donar libros y materiales</h2>
+        <p class="mt-2 text-sm text-stone-700">
+          Recibimos donaciones de libros, revistas y materiales en buen estado que enriquezcan nuestra colección.
+          Antes de traer la donación, contáctanos para verificar que sea pertinente.
+        </p>
+        <ul class="mt-4 grid gap-2 text-sm text-stone-700">
+          <li>• Libros académicos en buen estado.</li>
+          <li>• Colecciones especializadas o de autor.</li>
+          <li>• Material audiovisual y multimedia.</li>
+          <li>• Archivos personales o institucionales (previa evaluación).</li>
+        </ul>
+      </section>
+
+      <section class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm">
+        <h2 class="font-display text-xl font-semibold text-stone-900">Aportes económicos</h2>
+        <p class="mt-2 text-sm text-stone-700">
+          Si deseas apoyar con un aporte económico para la conservación de fondos, digitalización o programas
+          educativos, escríbenos y te orientaremos sobre el proceso.
+        </p>
+      </section>
+    </div>
+
+    <aside class="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm">
+      <h3 class="font-display text-lg font-semibold text-stone-900">¿Quieres donar?</h3>
+      <p class="mt-2 text-sm text-stone-700">Escríbenos y te orientaremos.</p>
+      <a href="/contacto" class="mt-4 inline-flex items-center rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+        Iniciar conversación
+      </a>
+    </aside>
+  </div>
+</PageLayout>

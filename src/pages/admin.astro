@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopUtilityBar from '../components/TopUtilityBar.astro';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<BaseLayout
+  title="Panel de Administración · Biblioteca Central ULS"
+  description="Administra usuarios, libros y préstamos del sistema."
+>
+  <TopUtilityBar />
+  <AnnouncementBar />
+  <SiteHeader />
+
+  <main id="contenido-principal" class="min-h-screen bg-blue-50">
+
+    <!-- Cabecera azul -->
+    <div class="border-b border-blue-300 bg-gradient-to-r from-blue-600 to-blue-800 px-4 py-10">
+      <div class="mx-auto max-w-7xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">Solo administradores</p>
+        <h1 class="font-display mt-2 text-3xl font-semibold text-white sm:text-4xl">Panel de Administración</h1>
+        <p class="mt-3 max-w-3xl text-white/80">Administra usuarios, libros y préstamos de la Biblioteca Central ULS.</p>
+      </div>
+    </div>
+
+    <!-- Bienvenida + tarjetas -->
+    <div class="mx-auto max-w-7xl px-4 py-12 lg:px-6">
+
+      <p id="bienvenida" class="mb-8 text-lg text-stone-700"></p>
+
+      <div class="grid gap-6 md:grid-cols-3">
+
+        <!-- Tarjeta Usuarios -->
+        <a href="/admin/usuarios" class="group block rounded-2xl border border-blue-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-400">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-2xl group-hover:bg-blue-200 transition">
+            👥
+          </div>
+          <h2 class="font-display text-xl font-semibold text-blue-900 group-hover:text-blue-700">Usuarios</h2>
+          <p class="mt-2 text-sm text-stone-600">Gestionar usuarios registrados en el sistema.</p>
+          <p class="mt-4 text-sm font-semibold text-blue-600">
+            Ver usuarios <span class="ml-1 transition group-hover:translate-x-1 inline-block">→</span>
+          </p>
+        </a>
+
+        <!-- Tarjeta Libros -->
+        <a href="/admin/libros" class="group block rounded-2xl border border-blue-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-400">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-2xl group-hover:bg-blue-200 transition">
+            📚
+          </div>
+          <h2 class="font-display text-xl font-semibold text-blue-900 group-hover:text-blue-700">Libros</h2>
+          <p class="mt-2 text-sm text-stone-600">Agregar, editar y eliminar libros del catálogo.</p>
+          <p class="mt-4 text-sm font-semibold text-blue-600">
+            Gestionar libros <span class="ml-1 transition group-hover:translate-x-1 inline-block">→</span>
+          </p>
+        </a>
+
+        <!-- Tarjeta Préstamos -->
+        <a href="/admin/prestamos" class="group block rounded-2xl border border-blue-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-blue-400">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-2xl group-hover:bg-blue-200 transition">
+            📖
+          </div>
+          <h2 class="font-display text-xl font-semibold text-blue-900 group-hover:text-blue-700">Préstamos</h2>
+          <p class="mt-2 text-sm text-stone-600">Ver y administrar todos los préstamos del sistema.</p>
+          <p class="mt-4 text-sm font-semibold text-blue-600">
+            Ver préstamos <span class="ml-1 transition group-hover:translate-x-1 inline-block">→</span>
+          </p>
+        </a>
+
+      </div>
+
+      <!-- Estadísticas rápidas -->
+      <div class="mt-12 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-xl border border-blue-200 bg-white p-5 text-center">
+          <p class="text-xs font-semibold uppercase tracking-wide text-stone-500">Usuarios</p>
+          <p id="statUsuarios" class="mt-1 text-3xl font-bold text-blue-700">—</p>
+        </div>
+        <div class="rounded-xl border border-blue-200 bg-white p-5 text-center">
+          <p class="text-xs font-semibold uppercase tracking-wide text-stone-500">Libros</p>
+          <p id="statLibros" class="mt-1 text-3xl font-bold text-blue-700">—</p>
+        </div>
+        <div class="rounded-xl border border-blue-200 bg-white p-5 text-center">
+          <p class="text-xs font-semibold uppercase tracking-wide text-stone-500">Préstamos activos</p>
+          <p id="statPrestamos" class="mt-1 text-3xl font-bold text-blue-700">—</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', async () => {
+    // Verificar que el usuario sea admin
+    const usuarioGuardado = localStorage.getItem('uls_usuario');
+    const usuario = usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
+
+    if (!usuario || usuario.rol !== 'admin') {
+      alert('Acceso denegado. Solo los administradores pueden ver esta página.');
+      window.location.href = '/login';
+      return;
+    }
+
+    // Mostrar bienvenida
+    document.getElementById('bienvenida').textContent =
+      `Bienvenida, ${usuario.nombre}. Desde aquí puedes administrar el sistema.`;
+
+    // Cargar estadísticas rápidas
+    try {
+      const [resU, resL, resP] = await Promise.all([
+        fetch('/api/auth?action=usuarios').then(r => r.json()),
+        fetch('/api/libros').then(r => r.json()),
+        fetch('/api/prestamos?todos=true').then(r => r.json()),
+      ]);
+
+      document.getElementById('statUsuarios').textContent = resU.usuarios?.length ?? 0;
+      document.getElementById('statLibros').textContent = resL.libros?.length ?? 0;
+      const activos = (resP.prestamos ?? []).filter(p => !p.devuelto).length;
+      document.getElementById('statPrestamos').textContent = activos;
+    } catch (e) {
+      console.error('Error cargando estadísticas', e);
+    }
+  });
+</script>

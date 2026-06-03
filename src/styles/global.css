@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Source Serif 4", "Georgia", ui-serif, serif;
+  --font-sans: "Source Sans 3", system-ui, sans-serif;
+  --color-harvard-crimson: #a51c30;
+  --color-harvard-crimson-dark: #7a1525;
+  --color-ink: #1a1a1a;
+  --color-muted: #4b5563;
+  --color-surface: #fafaf9;
+  --color-border-subtle: #e7e5e4;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth antialiased text-stone-900;
+    font-family: var(--font-sans);
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}

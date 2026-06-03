@@ -1,0 +1,58 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const exposiciones = [
+  {
+    slug: 'musica-en-mision',
+    title: 'Música en misión: legado de jazz y espiritual',
+    date: 'Hasta marzo 2027',
+    place: 'Sala de exposiciones · Sede central',
+    image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&q=80',
+    desc: 'Recorrido por la historia del jazz y la música espiritual a través de partituras, fotografías y grabaciones del fondo musical de la biblioteca.',
+  },
+  {
+    slug: 'cartografias-imaginadas',
+    title: 'Cartografías imaginadas',
+    date: 'Octubre 2026 – Febrero 2027',
+    place: 'Sala B · Sede central',
+    image: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&q=80',
+    desc: 'Mapas históricos y representaciones cartográficas de El Salvador y Centroamérica.',
+  },
+  {
+    slug: 'memorias-tipograficas',
+    title: 'Memorias tipográficas',
+    date: 'Septiembre 2026',
+    place: 'Pasillo de exposiciones',
+    image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80',
+    desc: 'Una selección de impresos, cajas tipográficas y libros antiguos del archivo institucional.',
+  },
+];
+---
+
+<PageLayout
+  title="Exposiciones · Biblioteca Central ULS"
+  description="Exposiciones actuales y próximas en la Biblioteca Central ULS."
+  eyebrow="Visítanos"
+  heading="Exposiciones"
+  subheading="Conoce nuestras exposiciones temporales y permanentes."
+>
+  <ul class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    {exposiciones.map((ex) => (
+      <li id={ex.slug} class="scroll-mt-28">
+        <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm">
+          <div class="aspect-[16/9] overflow-hidden">
+            <img src={ex.image} alt={ex.title} class="h-full w-full object-cover" loading="lazy" />
+          </div>
+          <div class="flex flex-1 flex-col p-6">
+            <h2 class="font-display text-lg font-semibold text-blue-900">{ex.title}</h2>
+            <p class="mt-2 text-sm text-stone-700">{ex.desc}</p>
+            <dl class="mt-4 space-y-1 text-sm">
+              <div class="flex gap-2"><dt class="font-semibold text-stone-500">Cuándo:</dt><dd>{ex.date}</dd></div>
+              <div class="flex gap-2"><dt class="font-semibold text-stone-500">Dónde:</dt><dd>{ex.place}</dd></div>
+            </dl>
+          </div>
+        </article>
+      </li>
+    ))}
+  </ul>
+</PageLayout>

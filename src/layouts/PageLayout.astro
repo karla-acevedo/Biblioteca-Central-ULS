@@ -1,0 +1,72 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TopUtilityBar from '../components/TopUtilityBar.astro';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  eyebrow?: string;
+  heading: string;
+  subheading?: string;
+}
+
+const {
+  title,
+  description,
+  eyebrow = 'Biblioteca Central ULS',
+  heading,
+  subheading,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <TopUtilityBar />
+  <AnnouncementBar />
+  <SiteHeader />
+
+  <main
+    id="contenido-principal"
+    class="min-h-screen bg-gradient-to-b from-blue-50 to-slate-100"
+  >
+
+    <!-- Encabezado -->
+    <div
+      class="border-b border-blue-300 bg-gradient-to-r from-sky-500 via-blue-500 to-blue-600 px-4 py-14 shadow-md"
+    >
+
+      <div class="mx-auto max-w-7xl">
+
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
+          {eyebrow}
+        </p>
+
+        <h1
+          class="font-display mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl"
+        >
+          {heading}
+        </h1>
+
+        {
+          subheading && (
+            <p class="mt-3 max-w-3xl text-white/80">
+              {subheading}
+            </p>
+          )
+        }
+
+      </div>
+
+    </div>
+
+    <!-- Contenido -->
+    <div class="mx-auto max-w-7xl px-4 py-12 lg:px-6">
+      <slot />
+    </div>
+
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

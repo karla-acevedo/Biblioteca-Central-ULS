@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SkipLink from '../components/SkipLink.astro';
+import TopUtilityBar from '../components/TopUtilityBar.astro';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import HeroSearch from '../components/HeroSearch.astro';
+import SectionCollections from '../components/SectionCollections.astro';
+import SectionExplore from '../components/SectionExplore.astro';
+import SectionDigitalGrid from '../components/SectionDigitalGrid.astro';
+import SectionVisitCTA from '../components/SectionVisitCTA.astro';
+import SectionExhibitionsEvents from '../components/SectionExhibitionsEvents.astro';
+import SectionOpenAccess from '../components/SectionOpenAccess.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<BaseLayout
+  title="Biblioteca Central ULS | Inicio"
+  description="Descubre colecciones, servicios y recursos digitales de la Biblioteca Central ULS."
+>
+  <SkipLink />
+  <TopUtilityBar />
+  <AnnouncementBar />
+  <SiteHeader />
+  <main id="contenido-principal">
+    <HeroSearch />
+    <SectionCollections />
+    <SectionExplore />
+    <SectionDigitalGrid />
+    <SectionVisitCTA />
+    <SectionExhibitionsEvents />
+    <SectionOpenAccess />
+  </main>
+  <SiteFooter />
+</BaseLayout>

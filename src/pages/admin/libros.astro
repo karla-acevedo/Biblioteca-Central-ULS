@@ -1,0 +1,284 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TopUtilityBar from '../../components/TopUtilityBar.astro';
+import AnnouncementBar from '../../components/AnnouncementBar.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+---
+
+<BaseLayout title="Gestión de Libros">
+
+  <TopUtilityBar />
+  <AnnouncementBar />
+  <SiteHeader />
+
+  <main class="min-h-screen bg-blue-50">
+
+    <!-- HEADER -->
+    <div class="bg-gradient-to-r from-sky-500 via-blue-500 to-blue-600 text-white px-6 py-10 shadow-md">
+
+      <div class="max-w-7xl mx-auto">
+
+        <h1 class="text-4xl font-bold">
+          Gestión de Libros
+        </h1>
+
+        <p class="text-blue-100 mt-2">
+          Administra los libros del catálogo
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-3 gap-8">
+
+      <!-- FORMULARIO -->
+      <div class="bg-white p-6 rounded-2xl shadow-xl border border-blue-100 h-fit">
+
+        <h2 class="text-2xl font-bold text-blue-700 mb-6 flex items-center gap-2">
+          📚 Agregar libro
+        </h2>
+
+        <form id="formLibro" class="space-y-4">
+
+          <input
+            id="titulo"
+            placeholder="Título"
+            class="w-full border border-blue-100 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+
+          <input
+            id="autor"
+            placeholder="Autor"
+            class="w-full border border-blue-100 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+
+          <input
+            id="categoria"
+            placeholder="Categoría"
+            class="w-full border border-blue-100 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+
+          <input
+            id="anio"
+            type="number"
+            placeholder="Año"
+            class="w-full border border-blue-100 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+
+          <input
+            id="copias"
+            type="number"
+            value="1"
+            class="w-full border border-blue-100 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+
+          <input
+            id="isbn"
+            placeholder="ISBN"
+            class="w-full border border-blue-100 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+
+          <textarea
+            id="descripcion"
+            placeholder="Descripción"
+            class="w-full border border-blue-100 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+          ></textarea>
+
+          <button
+            class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:scale-[1.02] transition duration-300 text-white py-3 rounded-xl font-semibold shadow-md"
+          >
+            Agregar libro
+          </button>
+
+        </form>
+
+      </div>
+
+      <!-- CATÁLOGO -->
+      <div class="lg:col-span-2">
+
+        <h2 class="text-2xl font-bold text-blue-700 mb-6">
+          📖 Catálogo
+        </h2>
+
+        <div
+          id="listaLibros"
+          class="grid gap-6 sm:grid-cols-2 md:grid-cols-3"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <SiteFooter />
+
+</BaseLayout>
+
+<script is:inline>
+
+let libros = [];
+
+// ✅ Cargar libros
+async function cargarLibros() {
+
+  try {
+
+    const res = await fetch('/api/libros');
+
+    const data = await res.json();
+
+    libros = data.libros || [];
+
+    render();
+
+  } catch (e) {
+
+    console.error("Error:", e);
+
+  }
+
+}
+
+// ✅ Renderizar libros
+function render() {
+
+  const cont = document.getElementById('listaLibros');
+
+  cont.innerHTML = '';
+
+  libros.forEach(l => {
+
+    const card = document.createElement('div');
+
+    card.className =
+      "bg-white rounded-2xl shadow-lg overflow-hidden border border-blue-100 hover:shadow-2xl transition duration-300";
+
+    card.innerHTML = `
+
+      <div class="h-48 bg-gray-200 overflow-hidden">
+
+        <img
+        src="${l.portada || 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=1200&auto=format&fit=crop'}"
+          class="w-full h-full object-cover"
+        />
+
+      </div>
+
+      <div class="p-4">
+
+        <p class="text-xs text-blue-500 font-semibold uppercase">
+          ${l.categoria || 'General'}
+        </p>
+
+        <h3 class="font-bold text-lg text-gray-800 mt-1">
+          ${l.titulo}
+        </h3>
+
+        <p class="text-sm text-gray-500">
+          ${l.autor}
+        </p>
+
+        <p class="text-sm text-gray-600 mt-2 line-clamp-3">
+          ${l.descripcion || 'Sin descripción'}
+        </p>
+
+        <p class="text-sm mt-3 font-semibold ${
+          l.disponibles > 0
+            ? 'text-green-600'
+            : 'text-red-500'
+        }">
+
+          ${l.disponibles} disponibles
+
+        </p>
+
+        <button
+          onclick="eliminar(${l.id})"
+          class="mt-4 w-full bg-red-100 hover:bg-red-200 transition text-red-600 text-sm py-2 rounded-xl font-medium"
+        >
+          Eliminar
+        </button>
+
+      </div>
+
+    `;
+
+    cont.appendChild(card);
+
+  });
+
+}
+
+// ✅ Eliminar libro
+async function eliminar(id) {
+
+  await fetch('/api/libros?id=' + id, {
+    method: 'DELETE'
+  });
+
+  cargarLibros();
+
+}
+
+// ✅ Agregar libro
+document
+  .getElementById('formLibro')
+  .addEventListener('submit', async e => {
+
+    e.preventDefault();
+
+    const libro = {
+
+      titulo: document.getElementById('titulo').value,
+
+      autor: document.getElementById('autor').value,
+
+      categoria: document.getElementById('categoria').value,
+
+      anio: document.getElementById('anio').value,
+
+      isbn: document.getElementById('isbn').value,
+
+      copias: Number(
+        document.getElementById('copias').value
+      ),
+
+      disponibles: Number(
+        document.getElementById('copias').value
+      ),
+
+      descripcion:
+        document.getElementById('descripcion').value
+
+    };
+
+    await fetch('/api/libros', {
+
+      method: 'POST',
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify(libro)
+
+    });
+
+    e.target.reset();
+
+    cargarLibros();
+
+  });
+
+// ✅ Inicializar
+cargarLibros();
+
+</script>
+```
